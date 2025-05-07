@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Character/PlayerData")]
-public class PlayerData : ScriptableObject
+
+public class PlayerData : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpHeight = 2f;
-    public float attackDamage = 10f;
+    public float MaxHealth = 100.0f;
+    public float CurrentHealth = 100.0f;
+    public float MoveSpeed = 10.0f;
+
+    public int currentAmmo = 100;
+    public int maxAmmo = 100;
 }

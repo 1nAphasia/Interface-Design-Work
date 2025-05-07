@@ -43,8 +43,8 @@ public class CameraController : MonoBehaviour
             currentPitch = Mathf.Clamp(currentPitch, verticalLookDownLimit, verticalLookUpLimit);
             transform.eulerAngles = new Vector3(currentPitch, currentYaw, 0f);
             // 让摄像机跟随玩家
-            transform.position = player.position - transform.forward * disToPlayer + transform.up * offsetToUp + transform.right * offsetToSide; // 保持一定的距离
         }
+        transform.position = player.position - transform.forward * disToPlayer + transform.up * offsetToUp + transform.right * offsetToSide; // 保持一定的距离
     }
 
     private void GetCameraInput()

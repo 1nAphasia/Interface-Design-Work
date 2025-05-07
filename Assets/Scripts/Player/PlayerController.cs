@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls controls;
     private Vector2 moveInput;
-    private Camera cam;
-
+    public Camera Cam;
+    private Vector3 CamForward;
+    private Vector3 CamRight;
     private bool jumpPressed;
     private bool attackPressed;
+    private CharacterController controller;
+    private PlayerData playerData;
 
     void Awake()
     {
@@ -28,6 +31,9 @@ public class PlayerController : MonoBehaviour
         RunState = new PlayerRunState(this, stateMachine);
         AimState = new PlayerAimState(this, stateMachine);
         controls = new PlayerControls();
+        Cam = Camera.main;
+        controller = GetComponent<CharacterController>();
+        playerData = GetComponent<PlayerData>();
     }
 
     void OnEnable()
@@ -46,7 +52,12 @@ public class PlayerController : MonoBehaviour
     {
         GetMoveInput();
         GetJumpInput();
-
+        GetCamDir();
+        if (MoveInput != Vector2.zero)
+        {
+            Vector3 move = (CamForward * moveInput.y + CamRight * moveInput.x) * Time.deltaTime * playerData.MoveSpeed;
+            controller.Move(move);
+        }
         stateMachine.Tick();
     }
 
@@ -63,5 +74,13 @@ public class PlayerController : MonoBehaviour
     {
         jumpPressed = controls.KeyboardMouse.Jump.IsPressed();
     }
-
+    private void GetCamDir()
+    {
+        CamForward = Cam.transform.forward;
+        CamRight = Cam.transform.right;
+        CamForward.y = 0;
+        CamRight.y = 0;
+        CamForward.Normalize();
+        CamRight.Normalize();
+    }
 }
