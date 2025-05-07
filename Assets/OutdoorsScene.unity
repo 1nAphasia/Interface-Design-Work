@@ -818,8 +818,8 @@ MonoBehaviour:
   smoothTime: 0.1
   verticalLookUpLimit: 80
   verticalLookDownLimit: -60
-  disToPlayer: 5
-  offsetToSide: 2
+  disToPlayer: 6
+  offsetToSide: 2.5
   offsetToUp: 2
 --- !u!114 &1823688470
 MonoBehaviour:
